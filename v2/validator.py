@@ -4,14 +4,10 @@ from typing import Any
 import srsly
 from codetiming import Timer
 
-from schemas import Wine
+from schemas import WinesTypeAdapter, Wine
 
 # Custom types
 JsonBlob = dict[str, Any]
-
-
-class FileNotFoundError(Exception):
-    pass
 
 
 def get_json_data(data_dir: Path, filename: str) -> list[JsonBlob]:
@@ -30,17 +26,15 @@ def get_json_data(data_dir: Path, filename: str) -> list[JsonBlob]:
 
 def validate(
     data: list[JsonBlob],
-    exclude_none: bool = False,
 ) -> list[JsonBlob]:
     """Validate a list of JSON blobs against the Wine schema"""
-    validated_data = [Wine(**item).model_dump(exclude_none=exclude_none) for item in data]
-    return validated_data
+    return WinesTypeAdapter.validate_python(data)
 
 
 def run():
     """Wrapper function to time the validator over many runs"""
     with Timer(name="Single case", text="{name}: {seconds:.3f} sec"):
-        validated_data = validate(data, exclude_none=True)
+        validated_data = validate(data)
         print(f"Validated {len(validated_data)} records in cycle {i + 1} of {num}")
 
 
