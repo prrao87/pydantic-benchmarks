@@ -1,6 +1,8 @@
-# Pydantic v2: Obtain a 5x speedup over v1
+# Pydantic v2: Obtain up to a 10x speedup over v1
 
 This repo contains code to reproduce the benchmark from a [blog post](https://thedataquarry.com/posts/why-pydantic-v2-matters/) showcasing a 5x performance improvement of Pydantic v2 over v1 (thanks to Rust 🦀). Read the blog post linked for more details!
+
+**Update**: Simply changing the v1 logic over to align with the v2 API yielded a 5x performance improvement. With some knowledge of the tools available in v2 and improving the code, it's possible to get a 10x performance improvement!
 
 ## Setup
 
@@ -26,4 +28,4 @@ source v2/bin/activate
 pip install -r requirements.txt
 ```
 
-Next, navigate to the `v1/` and `v2/` directories to run each benchmark.
+Then, navigate to the `v1/` and `v2/` directories to run each benchmark.
