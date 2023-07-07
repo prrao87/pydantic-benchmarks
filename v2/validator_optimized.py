@@ -4,7 +4,7 @@ from typing import Any
 import srsly
 from codetiming import Timer
 
-from schemas_optimized import WinesTypeAdapter, Wine
+from schemas_optimized import WinesTypeAdapter
 
 # Custom types
 JsonBlob = dict[str, Any]

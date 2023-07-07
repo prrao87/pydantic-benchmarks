@@ -11,8 +11,9 @@ def exclude_none(s: str | None) -> str:
     else:
         return s
 
-
-ExcludeNoneStr = Annotated[str, BeforeValidator(exclude_none)]
+# Annotated types to allow exclusion of None values to occur during validation, not after
+ExcludeNoneStr = Annotated[constr(strip_whitespace=True), BeforeValidator(exclude_none)]
+ExcludeNoneFloat = Annotated[float, BeforeValidator(exclude_none)]
 
 
 class Wine(TypedDict):
@@ -20,10 +21,10 @@ class Wine(TypedDict):
     points: int
     title: str
     description: NotRequired[ExcludeNoneStr]
-    price: NotRequired[Annotated[float, BeforeValidator(exclude_none)]]
+    price: NotRequired[ExcludeNoneFloat]
     variety: NotRequired[ExcludeNoneStr]
     winery: NotRequired[ExcludeNoneStr]
-    designation: NotRequired[constr(strip_whitespace=True)]
+    designation: NotRequired[ExcludeNoneStr]
     country: NotRequired[str]
     province: NotRequired[str]
     region_1: NotRequired[str]
