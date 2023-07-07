@@ -62,4 +62,5 @@ if __name__ == "__main__":
     }
     wine = Wine(**sample_data)
     from pprint import pprint
+
     pprint(wine.model_dump(exclude_none=True))
