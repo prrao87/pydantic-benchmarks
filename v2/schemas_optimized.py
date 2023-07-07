@@ -1,6 +1,6 @@
-from pydantic import BeforeValidator, TypeAdapter, constr, field_validator
+from pydantic import TypeAdapter, constr, field_validator, model_validator
 from pydantic_core import PydanticOmit
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 def exclude_none(s: str | None) -> str:
@@ -11,28 +11,23 @@ def exclude_none(s: str | None) -> str:
     else:
         return s
 
-# Annotated types to allow exclusion of None values to occur during validation, not after
-ExcludeNoneStr = Annotated[constr(strip_whitespace=True), BeforeValidator(exclude_none)]
-ExcludeNoneFloat = Annotated[float, BeforeValidator(exclude_none)]
-
-
 class Wine(TypedDict):
     id: int
     points: int
     title: str
-    description: NotRequired[ExcludeNoneStr]
-    price: NotRequired[ExcludeNoneFloat]
-    variety: NotRequired[ExcludeNoneStr]
-    winery: NotRequired[ExcludeNoneStr]
-    designation: NotRequired[ExcludeNoneStr]
+    description: NotRequired[str]
+    price: NotRequired[float]
+    variety: NotRequired[str]
+    winery: NotRequired[str]
+    designation: NotRequired[constr(strip_whitespace=True)]
     country: NotRequired[str]
     province: NotRequired[str]
     region_1: NotRequired[str]
     region_2: NotRequired[str]
-    taster_name: NotRequired[ExcludeNoneStr]
-    taster_twitter_handle: NotRequired[ExcludeNoneStr]
+    taster_name: NotRequired[str]
+    taster_twitter_handle: NotRequired[str]
 
-    @field_validator("designation", "province", "region_1", "region_2", mode="before")
+    @field_validator("*", mode="before")
     def omit_null_none(cls, v):
         if v is None or v == "null":
             raise PydanticOmit
@@ -45,6 +40,14 @@ class Wine(TypedDict):
             return "Unknown"
         else:
             return s
+
+    @model_validator(mode="after")
+    def _get_vineyard(cls, values):
+        "Rename designation to vineyard"
+        vineyard = values.pop("designation", None)
+        if vineyard:
+            values["vineyard"] = vineyard.strip()
+        return values
 
 
 WinesTypeAdapter = TypeAdapter(list[Wine])
@@ -62,10 +65,10 @@ if __name__ == "__main__":
         "country": "null",  # Test null handling
         "province": "Maule Valley",
         "region_1": "null",  # Test null handling
-        "region_2": "null",
+        # "region_2": "null"  # Test missing value handling
         "taster_name": "Michael Schachner",
         "taster_twitter_handle": "@wineschach",
-        "designation": "  The Vineyard  ",
+        "designation": "  The Vineyard  ",  # Test whitespace stripping
     }
     wines = WinesTypeAdapter.validate_python([sample_data])
     from pprint import pprint
