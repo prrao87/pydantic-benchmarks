@@ -1,6 +1,21 @@
-from pydantic import TypeAdapter, constr, field_validator, model_validator
+from pydantic import TypeAdapter, BeforeValidator, constr, field_validator, model_validator
 from pydantic_core import PydanticOmit
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+not_required_fields = [
+    "description",
+    "price",
+    "variety",
+    "winery",
+    "designation",
+    "country",
+    "province",
+    "region_1",
+    "region_2",
+    "taster_name",
+    "taster_twitter_handle",
+]
 
 
 def exclude_none(s: str | None) -> str:
@@ -10,6 +25,10 @@ def exclude_none(s: str | None) -> str:
         raise PydanticOmit
     else:
         return s
+
+
+ExcludeNoneStr = Annotated[str, BeforeValidator(exclude_none)]
+
 
 class Wine(TypedDict):
     id: int
@@ -27,8 +46,9 @@ class Wine(TypedDict):
     taster_name: NotRequired[str]
     taster_twitter_handle: NotRequired[str]
 
-    @field_validator("*", mode="before")
+    @field_validator(*not_required_fields, mode="before")
     def omit_null_none(cls, v):
+        # type: ignore
         if v is None or v == "null":
             raise PydanticOmit
         else:
@@ -36,6 +56,7 @@ class Wine(TypedDict):
 
     @field_validator("country", mode="before")
     def country_unknown(cls, s: str | None) -> str:
+        # type: ignore
         if s is None or s == "null":
             return "Unknown"
         else:
@@ -43,6 +64,7 @@ class Wine(TypedDict):
 
     @model_validator(mode="after")
     def _get_vineyard(cls, values):
+        # type: ignore
         "Rename designation to vineyard"
         vineyard = values.pop("designation", None)
         if vineyard:

@@ -39,26 +39,26 @@ See the `schemas_optimized.py` and `validator_optimized.py` for details.
 ```sh
 $ python validator_optimized.py
 Validated 129971 records in cycle 1 of 10
-Single case: 0.362 sec
+Single case: 0.326 sec
 Validated 129971 records in cycle 2 of 10
-Single case: 0.349 sec
+Single case: 0.313 sec
 Validated 129971 records in cycle 3 of 10
-Single case: 0.350 sec
+Single case: 0.310 sec
 Validated 129971 records in cycle 4 of 10
-Single case: 0.346 sec
+Single case: 0.310 sec
 Validated 129971 records in cycle 5 of 10
-Single case: 0.347 sec
+Single case: 0.315 sec
 Validated 129971 records in cycle 6 of 10
-Single case: 0.346 sec
+Single case: 0.318 sec
 Validated 129971 records in cycle 7 of 10
-Single case: 0.347 sec
+Single case: 0.312 sec
 Validated 129971 records in cycle 8 of 10
-Single case: 0.347 sec
+Single case: 0.310 sec
 Validated 129971 records in cycle 9 of 10
-Single case: 0.347 sec
+Single case: 0.335 sec
 Validated 129971 records in cycle 10 of 10
-Single case: 0.344 sec
-All cases: 3.688 sec
+Single case: 0.327 sec
+All cases: 3.386 sec
 ```
 
-With the optimized version, running ~1.3 million validations on this sample dataset using Pydantic v2 took ~3.6 sec, which is almost a 10x improvement from the v1 code! The optimized code is a little more verbose than the original, but understanding how to use Pydantic objects appropriately can yield great dividends in terms of performance.
+With the optimized version, running ~1.3 million validations on this sample dataset using Pydantic v2 took ~3.4 sec, which is almost a 10x improvement from the v1 code! The optimized code is a little more verbose than the original, but understanding how to use Pydantic objects appropriately can yield great dividends in terms of performance.
