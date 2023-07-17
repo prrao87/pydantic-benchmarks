@@ -1,7 +1,12 @@
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class Wine(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+        str_strip_whitespace=True,
+    )
+
     id: int
     points: int
     title: str
@@ -9,7 +14,7 @@ class Wine(BaseModel):
     price: float | None
     variety: str | None
     winery: str | None
-    designation: str | None
+    designation: str | None = Field(None, alias="vineyard")
     country: str | None
     province: str | None
     region_1: str | None
@@ -34,14 +39,6 @@ class Wine(BaseModel):
             values["country"] = "Unknown"
         return values
 
-    @model_validator(mode="before")
-    def _get_vineyard(cls, values):
-        "Rename designation to vineyard"
-        vineyard = values.pop("designation", None)
-        if vineyard:
-            values["vineyard"] = vineyard.strip()
-        return values
-
 
 if __name__ == "__main__":
     sample_data = {
@@ -63,4 +60,4 @@ if __name__ == "__main__":
     wine = Wine(**sample_data)
     from pprint import pprint
 
-    pprint(wine.model_dump(exclude_none=True))
+    pprint(wine.model_dump(exclude_none=True, by_alias=True))

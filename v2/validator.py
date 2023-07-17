@@ -32,7 +32,7 @@ def validate(
     data: list[JsonBlob],
 ) -> list[JsonBlob]:
     """Validate a list of JSON blobs against the Wine schema"""
-    validated_data = [Wine(**item).model_dump(exclude_none=True) for item in data]
+    validated_data = [Wine(**item).model_dump(exclude_none=True, by_alias=True) for item in data]
     return validated_data
 
 

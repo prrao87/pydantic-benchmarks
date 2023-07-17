@@ -1,7 +1,12 @@
-from pydantic import TypeAdapter, BeforeValidator, constr, field_validator, model_validator
+from pydantic import (
+    BeforeValidator,
+    TypeAdapter,
+    constr,
+    field_validator,
+    model_validator,
+)
 from pydantic_core import PydanticOmit
 from typing_extensions import Annotated, NotRequired, TypedDict
-
 
 not_required_fields = [
     "description",
