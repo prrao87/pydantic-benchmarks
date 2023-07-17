@@ -5,29 +5,29 @@ Activate the virtual environment that has Pydantic v2 installed. Then, run the v
 ```sh
 $ python validator.py
 Validated 129971 records in cycle 1 of 10
-Single case: 0.600 sec
+Single case: 0.644 sec
 Validated 129971 records in cycle 2 of 10
-Single case: 0.573 sec
+Single case: 0.612 sec
 Validated 129971 records in cycle 3 of 10
-Single case: 0.581 sec
+Single case: 0.614 sec
 Validated 129971 records in cycle 4 of 10
-Single case: 0.588 sec
+Single case: 0.614 sec
 Validated 129971 records in cycle 5 of 10
-Single case: 0.586 sec
+Single case: 0.617 sec
 Validated 129971 records in cycle 6 of 10
-Single case: 0.586 sec
+Single case: 0.619 sec
 Validated 129971 records in cycle 7 of 10
-Single case: 0.581 sec
+Single case: 0.680 sec
 Validated 129971 records in cycle 8 of 10
-Single case: 0.580 sec
+Single case: 0.635 sec
 Validated 129971 records in cycle 9 of 10
-Single case: 0.586 sec
+Single case: 0.625 sec
 Validated 129971 records in cycle 10 of 10
-Single case: 0.596 sec
-All cases: 6.076 sec
+Single case: 0.619 sec
+All cases: 6.551 sec
 ```
 
-Running ~1.3 million validations on this sample dataset using Pydantic v2 took ~6 sec. The timing numbers shown are from an M2 Macbook Pro. Depending on your CPU, your mileage may vary.
+Running ~1.3 million validations on this sample dataset using Pydantic v2 took ~6.5 sec, which is a ~5x improvement from v1. The timing numbers shown are from an M2 Macbook Pro. Depending on your CPU, your mileage may vary.
 
 ## 💡 Update: Optimized v2 version gives a 10x improvement over v1
 
@@ -61,4 +61,15 @@ Single case: 0.327 sec
 All cases: 3.386 sec
 ```
 
-With the optimized version, running ~1.3 million validations on this sample dataset using Pydantic v2 took ~3.4 sec, which is almost a 10x improvement from the v1 code! The optimized code is a little more verbose than the original, but understanding how to use Pydantic objects appropriately can yield great dividends in terms of performance.
+With the optimized version, running ~1.3 million validations on this sample dataset using Pydantic v2 took ~3.4 sec, which is almost a 10x improvement from v1! 
+
+### Caveats with optimized version 
+
+* The optimized code is a little more verbose and not as readable (i.e., "simple") as the original
+* `TypedDict` doesn't allow methods to be defined in it (per PEP 589), and so the optimized code which defines a validator under the `Wine` model that subclasses `TypedDict` will violate type checkers like `mypy` and `Pyright`.
+  * Disabling the type checker via `# type: ignore` can help with passing type checker tests; however, this is a workaround and deviated from the original intended use of `TypedDict`
+  * [See the discussion](https://github.com/pydantic/pydantic/discussions/6517) on the intention of Pydantic's maintainers to allow subclassing `TypedDict` for Pydantic use cases, even though it doesn't respect PEP 589. In the future, this may change, but for now, the readability of the optimized version is definitely not great compared to the v2 code that directly subcasses `BaseModel`.
+
+## Conclusions
+
+The aim of this exercise is to highlight how understanding the available Pydantic v2 objects and using them appropriately can yield significant performance improvements over older versions. It makes sense to explore the Pydantic v2 docs in more detail and see how to improve the readability of code while also maximizing performance.
