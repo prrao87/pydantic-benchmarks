@@ -1,4 +1,4 @@
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, Field, root_validator
 
 
 class Wine(BaseModel):
@@ -9,7 +9,7 @@ class Wine(BaseModel):
     price: float | None
     variety: str | None
     winery: str | None
-    designation: str | None
+    designation: str | None = Field(None, alias="vineyard")
     country: str | None
     province: str | None
     region_1: str | None
@@ -34,13 +34,9 @@ class Wine(BaseModel):
             values["country"] = "Unknown"
         return values
 
-    @root_validator
-    def _get_vineyard(cls, values):
-        "Rename designation to vineyard"
-        vineyard = values.pop("designation", None)
-        if vineyard:
-            values["vineyard"] = vineyard.strip()
-        return values
+    class Config:
+        allow_population_by_field_name = True,
+        anystr_strip_whitespace = True
 
 
 if __name__ == "__main__":
@@ -52,13 +48,14 @@ if __name__ == "__main__":
         "price": 10,  # Intentionally not a float to test coercion
         "variety": "Merlot",
         "winery": "Balduzzi",
-        "country": "null",     # Test null handling
+        "country": "null",  # Test null handling
         "province": "Maule Valley",
         "region_1": "null",  # Test null handling
         "region_2": "null",
         "taster_name": "Michael Schachner",
         "taster_twitter_handle": "@wineschach",
+        "designation": "  The Vineyard  ",
     }
     wine = Wine(**sample_data)
     from pprint import pprint
-    pprint(wine.dict(exclude_none=True))
+    pprint(wine.dict(exclude_none=True, by_alias=True))
