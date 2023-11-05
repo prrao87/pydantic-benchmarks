@@ -18,7 +18,7 @@ source venv1/bin/activate
 pip install -r requirements.txt
 ```
 
-Set up virtual environments for each subsequent directory (v2_0, v2_4, etc.) in the same way.
+Set up virtual environments for each subsequent directory (`v2_0`, `v2_4`, etc.) in the same way.
 
 Then, navigate to the respective directories to run the benchmark for each version of Pydantic.
 
