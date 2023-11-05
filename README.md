@@ -1,8 +1,8 @@
 # Pydantic benchmarks
 
-Code to benchmark the performance of Pydantic v2.x vs. v1.x.
+Code to benchmark the performance of newer versions of Pydantic.
 
-The first [blog post](https://thedataquarry.com/posts/why-pydantic-v2-matters/) in this series showcased a 5x-10x performance improvement of Pydantic v2.x over v1.x (thanks to Rust 🦀). Simply changing a few lines of code from the v1 logic over to align with the v2 API yielded a **5x** performance improvement. WHowever, with a little more advanced knowledge of Pydantic and the tools available in v2.x, it's possible to get more than 10x performance improvement!
+The first [blog post](https://thedataquarry.com/posts/why-pydantic-v2-matters/) in this series showcased how simply changing a few lines of code from the v1 logic over to align with the v2 API, yielded a **5x** performance improvement (thanks to the underlying [`pydantic-core`](https://github.com/pydantic/pydantic-core) being written in Rust 🦀 💪🏽). However, with a little more advanced knowledge of Pydantic's new features available in v2.x, it's possible to get more than 10x performance improvement! This will be discussed in more detail in the second blog post in this series.
 
 ## Setup
 
