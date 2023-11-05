@@ -2,11 +2,9 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-
+import util
 from schemas import Wine
 from schemas_optimized import WinesTypeAdapter
-
-import util
 
 # Custom types
 JsonBlob = dict[str, Any]
@@ -23,9 +21,7 @@ def data():
 
 def validate(data: list[JsonBlob]) -> list[JsonBlob]:
     """Validate a list of JSON blobs against the Wine schema"""
-    validated_data = [
-        Wine(**item).model_dump(exclude_none=True, by_alias=True) for item in data
-    ]
+    validated_data = [Wine(**item).model_dump(exclude_none=True, by_alias=True) for item in data]
     return validated_data
 
 
