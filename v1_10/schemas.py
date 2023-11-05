@@ -35,7 +35,7 @@ class Wine(BaseModel):
         return values
 
     class Config:
-        allow_population_by_field_name = True,
+        allow_population_by_field_name = (True,)
         anystr_strip_whitespace = True
 
 
@@ -58,4 +58,5 @@ if __name__ == "__main__":
     }
     wine = Wine(**sample_data)
     from pprint import pprint
+
     pprint(wine.dict(exclude_none=True, by_alias=True))

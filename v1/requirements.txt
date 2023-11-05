@@ -1,3 +1,0 @@
-pydantic==1.10.10
-srsly==2.4.6
-codetiming==1.4.0
