@@ -40,4 +40,4 @@ Pydantic version | Case | Run time (sec) | Speedup factor over v1
 2.4 | Optimized validator | 0.313 | 10.4
 2.5 | Optimized validator | 0.286 | 11.4
 
-The performance improvements in v2 came from the Rust layer, with additional improvements coming from Profile Guided Optimization (PGO) of `pydantic-code` compilation in v2.4, see [this comment](https://github.com/prrao87/pydantic-v2-test-drive/pull/1#issuecomment-1617746688) and the linked GitHub PR for more details.
+A large fraction of the performance improvements in v2 came from the Rust layer, with a portion of it coming from Profile Guided Optimization (PGO) of `pydantic-code` compilation in v2.4 and above, see [this comment](https://github.com/prrao87/pydantic-v2-test-drive/pull/1#issuecomment-1617746688) and the linked GitHub PR for more details.
