@@ -4,7 +4,7 @@ from typing import Any
 import pytest
 import util
 from schemas import Wine
-from schemas_optimized import WinesTypeAdapter
+from schemas_improved import WinesTypeAdapter
 
 # Custom types
 JsonBlob = dict[str, Any]
@@ -31,7 +31,7 @@ def test_validate(benchmark, data):
     assert len(result) == len(data)
 
 
-def test_validate_optimized(benchmark, data):
+def test_validate_improved(benchmark, data):
     """Validate a list of JSON blobs against the Wine schema"""
     result = benchmark(WinesTypeAdapter.validate_python, data)
     assert len(result) == len(data)

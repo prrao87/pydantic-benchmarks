@@ -1,7 +1,26 @@
-from pydantic import BaseModel, Field, root_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+not_required_fields = [
+    "description",
+    "price",
+    "variety",
+    "winery",
+    "designation",
+    "country",
+    "province",
+    "region_1",
+    "region_2",
+    "taster_name",
+    "taster_twitter_handle",
+]
 
 
 class Wine(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+        str_strip_whitespace=True,
+    )
+
     id: int
     points: int
     title: str
@@ -17,26 +36,21 @@ class Wine(BaseModel):
     taster_name: str | None
     taster_twitter_handle: str | None
 
-    @root_validator
+    @model_validator(mode="before")
     def _remove_unknowns(cls, values):
         "Set other fields that have the value 'null' as None so that we can throw it away"
-        fields = ["designation", "province", "region_1", "region_2"]
-        for field in fields:
+        for field in not_required_fields:
             if not values.get(field) or values.get(field) == "null":
                 values[field] = None
         return values
 
-    @root_validator
+    @model_validator(mode="before")
     def _fill_country_unknowns(cls, values):
         "Fill in missing country values with 'Unknown', as we always want this field to be queryable"
         country = values.get("country")
         if not country or country == "null":
             values["country"] = "Unknown"
         return values
-
-    class Config:
-        allow_population_by_field_name = (True,)
-        anystr_strip_whitespace = True
 
 
 if __name__ == "__main__":
@@ -48,10 +62,10 @@ if __name__ == "__main__":
         "price": 10,  # Intentionally not a float to test coercion
         "variety": "Merlot",
         "winery": "Balduzzi",
-        "country": "null",  # Test null handling
+        "country": "null",  # Test null handling with 'Unknown' fallback
         "province": "Maule Valley",
         "region_1": "null",  # Test null handling
-        "region_2": "null",
+        # "region_2": "null"  # Test missing value handling
         "taster_name": "Michael Schachner",
         "taster_twitter_handle": "@wineschach",
         "designation": "  The Vineyard  ",
@@ -59,4 +73,4 @@ if __name__ == "__main__":
     wine = Wine(**sample_data)
     from pprint import pprint
 
-    pprint(wine.dict(exclude_none=True, by_alias=True))
+    pprint(wine.model_dump(exclude_none=True), sort_dicts=False)
