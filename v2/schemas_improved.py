@@ -3,7 +3,6 @@ from pydantic import (
     TypeAdapter,
     constr,
     field_validator,
-    model_validator,
 )
 from pydantic_core import PydanticOmit
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -26,7 +25,7 @@ not_required_fields = [
 def exclude_none(s: str | None) -> str:
     if s is None:
         # since we want `exclude_none=True` in the end,
-        # just omit it None during validation
+        # just omit it if it's `None` during validation
         raise PydanticOmit
     else:
         return s
@@ -67,15 +66,6 @@ class Wine(TypedDict):
         else:
             return s
 
-    @model_validator(mode="after")
-    def _get_vineyard(cls, values):
-        # type: ignore
-        "Rename designation to vineyard"
-        vineyard = values.pop("designation", None)
-        if vineyard:
-            values["vineyard"] = vineyard.strip()
-        return values
-
 
 WinesTypeAdapter = TypeAdapter(list[Wine])
 
@@ -89,7 +79,7 @@ if __name__ == "__main__":
         "price": 10,  # Intentionally not a float to test coercion
         "variety": "Merlot",
         "winery": "Balduzzi",
-        "country": "null",  # Test null handling
+        "country": "null",  # Test null handling with 'Unknown' fallback
         "province": "Maule Valley",
         "region_1": "null",  # Test null handling
         # "region_2": "null"  # Test missing value handling

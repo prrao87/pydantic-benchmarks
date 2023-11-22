@@ -1,5 +1,19 @@
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+not_required_fields = [
+    "description",
+    "price",
+    "variety",
+    "winery",
+    "designation",
+    "country",
+    "province",
+    "region_1",
+    "region_2",
+    "taster_name",
+    "taster_twitter_handle",
+]
+
 
 class Wine(BaseModel):
     model_config = ConfigDict(
@@ -25,8 +39,7 @@ class Wine(BaseModel):
     @model_validator(mode="before")
     def _remove_unknowns(cls, values):
         "Set other fields that have the value 'null' as None so that we can throw it away"
-        fields = ["designation", "province", "region_1", "region_2"]
-        for field in fields:
+        for field in not_required_fields:
             if not values.get(field) or values.get(field) == "null":
                 values[field] = None
         return values
@@ -49,10 +62,10 @@ if __name__ == "__main__":
         "price": 10,  # Intentionally not a float to test coercion
         "variety": "Merlot",
         "winery": "Balduzzi",
-        "country": "null",  # Test null handling
+        "country": "null",  # Test null handling with 'Unknown' fallback
         "province": "Maule Valley",
         "region_1": "null",  # Test null handling
-        "region_2": "null",
+        # "region_2": "null"  # Test missing value handling
         "taster_name": "Michael Schachner",
         "taster_twitter_handle": "@wineschach",
         "designation": "  The Vineyard  ",
@@ -60,4 +73,4 @@ if __name__ == "__main__":
     wine = Wine(**sample_data)
     from pprint import pprint
 
-    pprint(wine.model_dump(exclude_none=True, by_alias=True))
+    pprint(wine.model_dump(exclude_none=True), sort_dicts=False)
