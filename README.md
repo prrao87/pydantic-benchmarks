@@ -54,7 +54,7 @@ Version | Run time (sec) | Speedup factor over v1
 
 ### Improved validator
 
-The improved validator makes use of intermediate concepts in Pydantic, using some of the new features available in v2, and produces results that are identical to the basic validator
+The improved validator makes use of intermediate concepts in Pydantic, using some of the new features available in v2, and produces results that are identical to the basic validator. Note that in this case, we cannot test v1 because the features used are available only in v2.
 
 Version | Run time (sec) | Speedup factor over v1
 ---: | ---: | ---:
