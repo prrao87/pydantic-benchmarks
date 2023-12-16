@@ -40,11 +40,14 @@ The dataset used for this benchmark is the [Wine Reviews](https://www.kaggle.com
 
 The benchmark was run using `pytest-benchmark`. See the respective version directories for steps to reproduce the benchmark results.
 
-The run times reported are for each validation over all 130k records of wine review data (JSON), reported as the average over 10 runs, amounting to ~1.3 million validations per version benchmarked.
+> [!NOTE]
+> * The numbers below are from a 2022 M2 Macbook Pro with 16GB RAM
+> * The dataset used comprises 129,971 wine review JSON records
+> * The run times reported as the average over 10 runs
 
 ### Basic validator
 
-The basic validator makes use of simple Pydantic models, with very minor changes between v1 and v2.
+The basic validator's [schema](./v2/schemas.py) makes use of simple Pydantic models, with very minor changes between v1 and v2.
 
 Version | Run time (sec) | Speedup factor over v1
 ---: | ---: | ---:
@@ -58,7 +61,7 @@ Version | Run time (sec) | Speedup factor over v1
 
 ### Improved validator
 
-The improved validator makes use of intermediate concepts in Pydantic, using some of the new features available in v2, and produces results that are identical to the basic validator. Note that in this case, we cannot test v1 because the features used are available only in v2.
+The improved validator's [schema](./v2/schemas_improved.py) makes use of intermediate concepts in Pydantic, using some of the new features available in v2. It produces results that are identical to the basic validator. Note that in this case, we cannot test v1 because the features used are available only in v2.
 
 Version | Run time (sec) | Speedup factor over v1
 ---: | ---: | ---:
@@ -69,4 +72,5 @@ Version | Run time (sec) | Speedup factor over v1
 `2.4.2` | 0.291 | 11.2
 `2.5.2` | 0.273 | 11.9
 
-It's clear that the underlying improvements to `pydantic-core` and `PyO3` at the Rust level have been having a noticeable impact at the Python level (as seen in the incremental improvements with each major release). Also, with the right knowledge of Pydantic v2 features, it's possible to optimize and tune every workflow to get the most out of your validation workflows. 💪🏽
+> [!Tip]
+> With the right knowledge of Pydantic v2 features, it's possible to optimize and tune every workflow to get the most out of your validation workflows. This is due to underlying improvements to `pydantic-core` and `PyO3` at the Rust level, that have been having a noticeable impact at the Python level.
