@@ -41,9 +41,8 @@ The dataset used for this benchmark is the [Wine Reviews](https://www.kaggle.com
 The benchmark was run using `pytest-benchmark`. See the respective version directories for steps to reproduce the benchmark results.
 
 > [!NOTE]
-> * The numbers below are from a 2022 M2 Macbook Pro with 16GB RAM
-> * The dataset used comprises 129,971 wine review JSON records
-> * The run times reported as the average over 10 runs
+> * The timing numbers below are from a 2022 M2 Macbook Pro with 16GB RAM
+> * The times reported are an average over 10 runs
 
 ### Basic validator
 
