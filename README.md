@@ -42,8 +42,8 @@ The dataset used for this benchmark is the [Wine Reviews](https://www.kaggle.com
 The benchmark was run using `pytest-benchmark`. See the respective version directories for steps to reproduce the benchmark results.
 
 > [!NOTE]
-> * The timing numbers below are from a 2022 M2 Macbook Pro with 16GB RAM
-> * The times reported are an average over 10 runs
+> * The timing numbers below are from a 2023 M3 Macbook Pro with 32GB RAM
+> * The times reported are an average over 10 runs, with 5 warmup runs
 
 ### Basic validator
 
@@ -51,14 +51,14 @@ The basic validator's [schema](./v2/schemas.py) makes use of simple Pydantic mod
 
 Version | Run time (sec) | Speedup factor over v1
 ---: | ---: | ---:
-`1.10.13` | 3.262 | 1.0
-`2.0.3` | 0.679 | 4.8
-`2.1.1` | 0.679 | 4.8
-`2.2.1` | 0.624 | 5.2
-`2.3.0` | 0.651 | 5.0
-`2.4.2` | 0.641 | 5.1
-`2.5.2` | 0.626 | 5.2
-`2.6.0b1` | 0.510 | 6.4
+`1.10.14` | 2.829 | 1.0
+`2.0.3` | 0.567 | 5.0
+`2.1.1` | 0.595 | 4.8
+`2.2.1` | 0.563 | 5.0
+`2.3.0` | 0.556 | 5.1
+`2.4.2` | 0.545 | 5.2
+`2.5.3` | 0.626 | 4.5
+`2.6.0b1` | 0.510 | 5.5
 
 ### Improved validator
 
@@ -66,13 +66,14 @@ The improved validator's [schema](./v2/schemas_improved.py) makes use of interme
 
 Version | Run time (sec) | Speedup factor over v1
 ---: | ---: | ---:
-`2.0.3` | 0.314 | 10.4
-`2.1.1` | 0.317 | 10.3
-`2.2.1` | 0.305 | 10.7
-`2.3.0` | 0.307 | 10.6
-`2.4.2` | 0.291 | 11.2
-`2.5.2` | 0.273 | 11.9
-`2.6.0b1` | 0.207 | 15.8
+`2.0.3` | 0.249 | 9.1
+`2.1.1` | 0.253 | 8.9
+`2.2.1` | 0.253 | 8.9
+`2.3.0` | 0.250 | 9.0
+`2.4.2` | 0.236 | 9.6
+`2.5.3` | 0.236 | 9.6
+`2.5.3` | 0.273 | 8.2
+`2.6.0b1` | 0.206 | 11.0
 
 > [!Tip]
 > With the right knowledge of Pydantic v2 features, it's possible to optimize and tune every workflow to get the most out of your validation workflows. This is due to underlying improvements to `pydantic-core` and `PyO3` at the Rust level, that have been having a noticeable impact at the Python level.
