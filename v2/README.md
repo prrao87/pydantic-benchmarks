@@ -27,7 +27,7 @@ $ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-ite
 =================================================================================================== test session starts ====================================================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
-rootdir: /Users/prrao/code/pydantic-benchmarks/v2
+rootdir: /code/pydantic-benchmarks/v2
 plugins: benchmark-4.0.0
 collected 2 items                                                                                                                                                                                                          
 
@@ -54,7 +54,7 @@ $ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-ite
 =================================================================================================== test session starts ====================================================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
-rootdir: /Users/prrao/code/pydantic-benchmarks/v2
+rootdir: /code/pydantic-benchmarks/v2
 plugins: benchmark-4.0.0
 collected 2 items                                                                                                                                                                                                          
 
@@ -81,7 +81,7 @@ $ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-ite
 =================================================================================================== test session starts ====================================================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
-rootdir: /Users/prrao/code/pydantic-benchmarks/v2
+rootdir: /code/pydantic-benchmarks/v2
 plugins: benchmark-4.0.0
 collected 2 items                                                                                                                                                                                                          
 
@@ -108,7 +108,7 @@ $ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-ite
 =================================================================================================== test session starts ====================================================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
-rootdir: /Users/prrao/code/pydantic-benchmarks/v2
+rootdir: /code/pydantic-benchmarks/v2
 plugins: benchmark-4.0.0
 collected 2 items                                                                                                                                                                                                          
 
@@ -135,7 +135,7 @@ $ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-ite
 =================================================================================================== test session starts ====================================================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
-rootdir: /Users/prrao/code/pydantic-benchmarks/v2
+rootdir: /code/pydantic-benchmarks/v2
 plugins: benchmark-4.0.0
 collected 2 items                                                                                                                                                                                                          
 
@@ -182,29 +182,29 @@ Legend:
 ========================================================================================================= 2 passed in 12.75s ==========================================================================================================
 ```
 
-## v2.6.0b1
+## v2.6.0
 
 ```sh
 $ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-iterations=5 --benchmark-min-rounds=10
-=================================================================================================== test session starts ====================================================================================================
+==================================================================== test session starts ====================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
 rootdir: /code/pydantic-benchmarks/v2
 plugins: benchmark-4.0.0
-collected 2 items                                                                                                                                                                                                          
+collected 2 items                                                                                                                                           
 
-benchmark_validator.py ..                                                                                                                                                                                            [100%]
+benchmark_validator.py ..                                                                                                                                [100%]
 
 
 ------------------------------------------------------------------------------------- benchmark: 2 tests ------------------------------------------------------------------------------------
 Name (time in ms)               Min                 Max                Mean            StdDev              Median               IQR            Outliers     OPS            Rounds  Iterations
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-test_validate              495.2161 (2.42)     515.0076 (2.45)     510.1626 (2.47)     5.6024 (2.82)     511.4304 (2.48)     3.0530 (1.09)          1;1  1.9602 (0.41)         10           1
-test_validate_improved     204.4535 (1.0)      210.4492 (1.0)      206.8550 (1.0)      1.9874 (1.0)      206.3810 (1.0)      2.7907 (1.0)           3;0  4.8343 (1.0)          10           1
+test_validate              487.9519 (2.39)     497.6179 (2.39)     492.0475 (2.40)     2.8717 (1.81)     490.6352 (2.40)     4.0264 (2.09)          2;0  2.0323 (0.42)         10           1
+test_validate_improved     203.7451 (1.0)      208.2939 (1.0)      205.1075 (1.0)      1.5908 (1.0)      204.2364 (1.0)      1.9220 (1.0)           2;0  4.8755 (1.0)          10           1
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Legend:
   Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
   OPS: Operations Per Second, computed as 1 / Mean
-==================================================================================================== 2 passed in 10.50s ====================================================================================================
+====================================================================== 2 passed in 10.15s ======================================================================
 ```
