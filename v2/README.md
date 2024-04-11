@@ -212,26 +212,26 @@ Legend:
 ## v2.7.0
 
 ```sh
-$ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-iterations=5 --benchmark-min-rounds=10
-
-=========================================================================== test session starts ============================================================================
+$  pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-iterations=5 --benchmark-min-rounds=10
+============================================================================================================================ test session starts ============================================================================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
-rootdir: code/pydantic-benchmarks/v2
+rootdir: /Users/prrao/code/pydantic-benchmarks/v2
 plugins: benchmark-4.0.0
-collected 2 items                                                                                                                                                          
+collected 2 items                                                                                                                                                                                                                                                           
 
-benchmark_validator.py ..                                                                                                                                            [100%]
+benchmark_validator.py ..                                                                                                                                                                                                                                             [100%]
 
 
 ------------------------------------------------------------------------------------- benchmark: 2 tests ------------------------------------------------------------------------------------
 Name (time in ms)               Min                 Max                Mean            StdDev              Median               IQR            Outliers     OPS            Rounds  Iterations
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-test_validate              461.8623 (2.43)     470.6203 (2.45)     463.8138 (2.43)     2.5107 (3.92)     463.0526 (2.43)     1.3362 (1.27)          1;1  2.1560 (0.41)         10           1
-test_validate_improved     189.9203 (1.0)      191.7310 (1.0)      190.7646 (1.0)      0.6399 (1.0)      190.6324 (1.0)      1.0501 (1.0)           3;0  5.2421 (1.0)          10           1
+test_validate              468.0800 (2.45)     481.1238 (2.43)     474.5391 (2.45)     4.0851 (1.81)     474.1971 (2.46)     4.5296 (1.63)          4;0  2.1073 (0.41)         10           1
+test_validate_improved     191.2331 (1.0)      197.6631 (1.0)      193.6634 (1.0)      2.2538 (1.0)      192.7988 (1.0)      2.7782 (1.0)           3;0  5.1636 (1.0)          10           1
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Legend:
   Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
   OPS: Operations Per Second, computed as 1 / Mean
+============================================================================================================================= 2 passed in 9.85s =============================================================================================================================
 ```
