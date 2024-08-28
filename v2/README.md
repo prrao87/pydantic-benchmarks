@@ -212,7 +212,7 @@ Legend:
 ## v2.7.0
 
 ```sh
-$  pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-iterations=5 --benchmark-min-rounds=10
+$ pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-iterations=5 --benchmark-min-rounds=10
 ============================================================================================================================ test session starts ============================================================================================================================
 platform darwin -- Python 3.11.7, pytest-7.4.4, pluggy-1.4.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
@@ -234,4 +234,32 @@ Legend:
   Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
   OPS: Operations Per Second, computed as 1 / Mean
 ============================================================================================================================= 2 passed in 9.85s =============================================================================================================================
+```
+
+## 2.8.2
+
+```sh
+pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-iterations=5 --benchmark-min-rounds=10
+======================================================================= test session starts ========================================================================
+platform darwin -- Python 3.12.5, pytest-8.3.2, pluggy-1.5.0
+benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
+rootdir: /Users/prrao/code/pydantic-benchmarks
+configfile: pyproject.toml
+plugins: benchmark-4.0.0
+collected 2 items                                                                                                                                                  
+
+benchmark_validator.py ..                                                                                                                                    [100%]
+
+
+------------------------------------------------------------------------------------- benchmark: 2 tests ------------------------------------------------------------------------------------
+Name (time in ms)               Min                 Max                Mean            StdDev              Median               IQR            Outliers     OPS            Rounds  Iterations
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test_validate              414.3437 (2.38)     435.5247 (2.46)     418.3501 (2.39)     6.2331 (5.97)     416.5830 (2.38)     2.3446 (1.25)          1;1  2.3903 (0.42)         10           1
+test_validate_improved     173.8688 (1.0)      176.8763 (1.0)      175.1716 (1.0)      1.0439 (1.0)      175.2374 (1.0)      1.8769 (1.0)           3;0  5.7087 (1.0)          10           1
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
+======================================================================== 2 passed in 8.83s =========================================================================
 ```
