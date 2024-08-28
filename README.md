@@ -12,7 +12,7 @@ See the tables below showing how the performance of Pydantic v2 has steadily imp
 
 ## Setup
 
-This code base has been tested in Python 3.11. It's recommended to set up a clean virtual environment to run the benchmarks.
+It's recommended to set up a clean virtual environment to run the benchmarks.
 
 ```sh
 python -m venv venv  # python -> python 3.11+
@@ -31,7 +31,8 @@ Install any subsequent versions of Pydantic as required by specifying their majo
 # pip install pydantic==2.4.2
 # pip install pydantic==2.5.2
 # pip install pydantic==2.6.0
-pip install pydantic==2.7.0
+# pip install pydantic==2.7.0
+pip install pydantic==2.8.2
 ```
 
 Then, navigate to the respective directories `v1` and `v2` to run the benchmark for each version of Pydantic.
@@ -63,6 +64,7 @@ Version | Run time (sec) | Speedup factor over v1
 `2.5.3` | 0.626 | 4.5
 `2.6.0` | 0.492 | 5.7
 `2.7.0` | 0.475 | 6.0
+`2.8.2` | 0.418 | 6.8
 
 ### Improved validator
 
@@ -78,6 +80,7 @@ Version | Run time (sec) | Speedup factor over v1
 `2.5.3` | 0.273 | 8.2
 `2.6.0` | 0.205 | 10.9
 `2.7.0` | 0.193 | 11.6
+`2.8.2` | 0.175 | 12.8
 
 > [!Tip]
 > With the right knowledge of Pydantic v2 features, it's possible to optimize and tune every workflow to get the most out of your validation workflows. This is due to underlying improvements to `pydantic-core` and `PyO3` at the Rust level, that have been having a noticeable impact at the Python level.
