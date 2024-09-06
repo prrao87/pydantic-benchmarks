@@ -263,3 +263,32 @@ Legend:
   OPS: Operations Per Second, computed as 1 / Mean
 ======================================================================== 2 passed in 8.83s =========================================================================
 ```
+
+## 2.9.0
+
+```
+pytest benchmark_validator.py --benchmark-sort=fullname --benchmark-warmup-iterations=5 --benchmark-min-rounds=10
+
+===================================================================== test session starts =====================================================================
+platform darwin -- Python 3.12.5, pytest-8.3.2, pluggy-1.5.0
+benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=10 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=5)
+rootdir: /Users/prrao/code/pydantic-benchmarks
+configfile: pyproject.toml
+plugins: benchmark-4.0.0
+collected 2 items                                                                                                                                             
+
+benchmark_validator.py ..                                                                                                                                          [100%]
+
+
+------------------------------------------------------------------------------------- benchmark: 2 tests -------------------------------------------------------------------------------------
+Name (time in ms)               Min                 Max                Mean            StdDev              Median                IQR            Outliers     OPS            Rounds  Iterations
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test_validate              407.6524 (2.52)     432.0754 (2.63)     415.1396 (2.56)     9.2048 (12.12)    410.4338 (2.53)     14.2973 (57.86)         2;0  2.4088 (0.39)         10           1
+test_validate_improved     161.7182 (1.0)      164.3937 (1.0)      162.2790 (1.0)      0.7596 (1.0)      162.0714 (1.0)       0.2471 (1.0)           1;1  6.1622 (1.0)          10           1
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
+=========================================================================== 2 passed in 8.60s ============================================================================
+```
