@@ -12,31 +12,32 @@ See the tables below showing how the performance of Pydantic v2 has steadily imp
 
 ## Setup
 
-It's recommended to set up a clean virtual environment to run the benchmarks.
+Activate a Python virtual environment and install the dependencies as follows.
 
-```sh
-python -m venv venv  # python -> python 3.11+
-source venv/bin/activate
-# Install dependencies
-pip install -r requirements.txt
+```bash
+# Assuming that the uv package manager is installed
+# https://github.com/astral-sh/uv
+uv venv
+source .venv/bin/activate
+uv pip install pydantic
 ```
 
-Install any subsequent versions of Pydantic as required by specifying their major and minor version numbers to benchmark each of them.
+Install any specific versions of Pydantic as required by specifying their major and minor version numbers to benchmark each of them.
 
 ```sh
-# pip install pydantic==2.0.3
-# pip install pydantic==2.1.1
-# pip install pydantic==2.2.1
-# pip install pydantic==2.3.0
-# pip install pydantic==2.4.2
-# pip install pydantic==2.5.2
-# pip install pydantic==2.6.0
-# pip install pydantic==2.7.0
-# pip install pydantic==2.8.2
-pip install pydantic==2.9.0
+# uv pip install pydantic==2.0.3
+# uv pip install pydantic==2.1.1
+# uv pip install pydantic==2.2.1
+# uv pip install pydantic==2.3.0
+# uv pip install pydantic==2.4.2
+# uv pip install pydantic==2.5.2
+# uv pip install pydantic==2.6.0
+# uv pip install pydantic==2.7.0
+# uv pip install pydantic==2.8.2
+uv pip install pydantic==2.9.0
 ```
 
-Then, navigate to the respective directories `v1` and `v2` to run the benchmark for each version of Pydantic.
+Navigate to the respective directories `v1` and `v2` to run the benchmark for each version of Pydantic.
 
 ## Dataset
 
@@ -86,4 +87,4 @@ Version | Run time (sec) | Speedup factor over v1
 `2.9.0` | 0.162 | 13.9
 
 > [!Tip]
-> With the right knowledge of Pydantic v2 features, it's possible to optimize and tune every workflow to get the most out of your validation workflows. This is due to underlying improvements to `pydantic-core` and `PyO3` at the Rust level, that have been having a noticeable impact at the Python level.
+> With the right knowledge of Pydantic v2 features, it's possible to optimize and tune your validation workflow to a much greater extent. The performance gains are largely due to underlying improvements to `pydantic-core` and `PyO3` at the Rust level, that are then noticeable at Python level.
