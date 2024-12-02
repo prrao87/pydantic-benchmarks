@@ -68,6 +68,7 @@ Version | Run time (sec) | Speedup factor over v1
 `2.7.0` | 0.475 | 6.0
 `2.8.2` | 0.418 | 6.8
 `2.9.0` | 0.415 | 6.8
+`2.10.2` | 0.424 | 6.7
 
 ### Improved validator
 
@@ -85,6 +86,6 @@ Version | Run time (sec) | Speedup factor over v1
 `2.7.0` | 0.193 | 11.6
 `2.8.2` | 0.175 | 12.8
 `2.9.0` | 0.162 | 13.9
-
+`2.10.2` | 0.155 | 14.3
 > [!Tip]
 > With the right knowledge of Pydantic v2 features, it's possible to optimize and tune your validation workflow to a much greater extent. The performance gains are largely due to underlying improvements to `pydantic-core` and `PyO3` at the Rust level, that are then noticeable at Python level.

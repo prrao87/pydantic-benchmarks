@@ -1,11 +1,7 @@
 # --- Older pydantic versions benchmarked ---
 # pydantic==1.10.13
-# pydantic==2.0.3
-# pydantic==2.1.1
-# pydantic==2.2.1
-# pydantic==2.3.0
-# pydantic==2.4.2
+# pydantic==2.x.x
 # --- Latest benchmarked pydantic version ---
-pydantic==2.5.2
+pydantic==2.10.2
 srsly==2.4.8
-pytest-benchmark==4.0.0
+pytest-benchmark==5.1.0
